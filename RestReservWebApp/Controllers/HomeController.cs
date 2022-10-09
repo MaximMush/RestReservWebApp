@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using RestReservWebApp.Models;
+﻿using BusinessLogicLayer.Models;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace RestReservWebApp.Controllers

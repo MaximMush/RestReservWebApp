@@ -1,4 +1,5 @@
 ﻿using BusinessLogicLayer.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,13 +9,14 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Date
 {
-    public class RestReservDbContext : DbContext
+    public class RestReservDbContext : IdentityDbContext<User>
     {
         public RestReservDbContext(DbContextOptions<RestReservDbContext> options) : base(options)
         {
 
         }
-        public DbSet<Category> categories { get; set; }
-        public DbSet<User> users { get; set; }
+        public DbSet<Category> categories { get; set; } = null!;
+        public DbSet<User> users { get; set; } = null!;
+        public DbSet<Restaurant> restaurants { get; set; } = null!;
     }
 }

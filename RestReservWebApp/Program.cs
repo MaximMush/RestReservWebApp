@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using DataAccessLayer.Date;
-
+using Microsoft.AspNetCore.Identity;
+using RestReservWebApp.Utility;
+using BusinessLogicLayer.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +10,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<RestReservDbContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<RestReservDbContext>();
+builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+//builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
+//builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders()
+    //.AddEntityFrameworkStores<RestReservDbContext>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -25,6 +34,7 @@ app.UseRouting();
 app.UseAuthentication();    
 
 app.UseAuthorization();
+app.MapRazorPages();
 
 app.MapControllerRoute(
     name: "default",
