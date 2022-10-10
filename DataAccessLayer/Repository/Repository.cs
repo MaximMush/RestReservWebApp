@@ -18,14 +18,12 @@ namespace DataAccessLayer.Repository
         public Repository(RestReservDbContext db)
         {
             _db = db;
-            //_db.ShoppingCarts.Include(u => u.Product).Include(u=>u.CoverType);
             this.dbSet = _db.Set<T>();
         }
         public void Add(T entity)
         {
             dbSet.Add(entity);
         }
-        //includeProp - "Category,CoverType"
         public IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter = null, string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
