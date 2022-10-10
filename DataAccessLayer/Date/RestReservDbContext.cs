@@ -18,5 +18,8 @@ namespace DataAccessLayer.Date
         public DbSet<Category> categories { get; set; } = null!;
         public DbSet<User> users { get; set; } = null!;
         public DbSet<Restaurant> restaurants { get; set; } = null!;
+        public DbSet<OrderHeader> orderHeaders { get; set; } = null!;
+        public DbSet<OrderDetail> orderDetail { get; set; } = null!;
+        public DbSet<RestaurantsAddress> restaurantsAddress { get; set; } = null!;
     }
 }

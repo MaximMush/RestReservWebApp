@@ -1,0 +1,128 @@
+﻿@model BusinessLogicLayer.Models.ViewModels.RestaurantVM
+
+<form method="post" asp-action="Upsert" enctype="multipart/form-data">
+	<input asp-for="Restaurant.Id" hidden />
+	<input asp-for="Restaurant.ImageUrl" hidden />
+
+	<div class="row">
+		<div class="col-10">
+			<div class="border p-3 mt-4 row">
+		<div class="col-12 pb-2">
+					<h2 class="text-primary">@(Model.Restaurant.Id != 0 ? "Update" : "Create")  Restaurant</h2>
+			<hr />
+		</div>
+		@*<div asp-validation-summary="All"></div>*@
+		<div class="mb-3">
+					<label asp-for="Restaurant.Name"></label>
+					<input asp-for="Restaurant.Name" class="form-control" />
+					<span asp-validation-for="Restaurant.Name" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+					<label asp-for="Restaurant.Description"></label>
+			<textarea asp-for="Restaurant.Description" rows="3" class="form-control"></textarea>
+					<span asp-validation-for="Restaurant.Description" class="text-danger"></span>
+		</div>
+		<div class="mb-3 col-6">
+			<label asp-for="Restaurant.PhoneNumber"></label>
+					<input asp-for="Restaurant.PhoneNumber" class="form-control" />
+					<span asp-validation-for="Restaurant.PhoneNumber" class="text-danger"></span>
+		</div>
+		@*<div class="mb-3 col-6">
+					<label asp-for="Restaurant.Address"></label>
+			<input asp-for="Restaurant.Address" class="form-control" />
+					<span asp-validation-for="Restaurant.Address" class="text-danger"></span>
+		</div>
+		<div class="mb-3 col-6">
+			<label asp-for="Product.ListPrice"></label>
+			<input asp-for="Product.ListPrice" class="form-control" />
+			<span asp-validation-for="Product.ListPrice" class="text-danger"></span>
+		</div>
+		<div class="mb-3 col-6">
+			<label asp-for="Product.Price"></label>
+			<input asp-for="Product.Price" class="form-control" />
+			<span asp-validation-for="Product.Price" class="text-danger"></span>
+		</div>
+		<div class="mb-3 col-6">
+			<label asp-for="Product.Price50"></label>
+			<input asp-for="Product.Price50" class="form-control" />
+			<span asp-validation-for="Product.Price50" class="text-danger"></span>
+		</div>
+		<div class="mb-3 col-6">
+			<label asp-for="Product.Price100"></label>
+			<input asp-for="Product.Price100" class="form-control" />
+			<span asp-validation-for="Product.Price100" class="text-danger"></span>
+		</div>*@
+		<div class="mb-3">
+			<label asp-for="Restaurant.ImageUrl"></label>
+			<input type="file" id="uploadBox" name="file" class="form-control" />
+		</div>
+
+		<div class="mb-3 col-6">
+					<label asp-for="Restaurant.CategoryId"></label>
+					<select asp-for="Restaurant.CategoryId" asp-items="@Model.CategoryList" class="form-select">
+				<option disabled selected>--Select Category--</option>
+			</select>
+			<span asp-validation-for="Restaurant.CategoryId" class="text-danger"></span>
+		</div>
+
+@*		<div class="mb-3 col-6">
+			<label asp-for="Product.CoverTypeId"></label>
+			<select asp-for="Product.CoverTypeId" asp-items="@Model.CoverTypeList" class="form-select">
+				<option disabled selected>--Select CoverType--</option>
+			</select>
+			<span asp-validation-for="Product.CoverTypeId" class="text-danger"></span>
+		</div>*@
+		<div class="col-12">
+			@if (Model.Restaurant.Id != 0)
+			{
+				<button type="submit" class="btn btn-primary" style="width:150px">Update</button>
+			}
+			else
+			{
+				<button type="submit" onclick="return ValidateInput()" class="btn btn-primary" style="width:150px">Create</button>
+			}
+			<a asp-controller="Restaurant" asp-action="Index" class="btn btn-secondary" style="width:150px">
+				Back to List
+			</a>
+		</div>
+
+	</div>
+		</div>
+		<div class="col-2 pt-4">
+			<img src="@Model.Restaurant.ImageUrl"
+			width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
+		</div>
+	</div>
+
+	
+
+
+
+
+
+</form>
+
+@section Scripts{
+	@{
+	<partial name="_ValidationScriptsPartial" />
+	}
+<script>
+    tinymce.init({
+      selector: 'textarea',
+      plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+      toolbar_mode: 'floating',
+   });
+  
+	function ValidateInput(){
+		if(document.getElementById("uploadBox").value==""){
+			Swal.fire({
+			  icon: 'error',
+			  title: 'Oops...',
+			  text: 'Please upload an Image!',
+			});
+			return false;
+		}
+		return true;
+	}
+</script>
+}

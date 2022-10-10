@@ -18,10 +18,17 @@ namespace DataAccessLayer.Repository
             _db = db;
             Category = new CategoryRepository(_db);
             Restaurant = new RestaurantRepository(_db);
+            User = new UserRepository(_db);
+            OrderHeader = new OrderHeaderRepository(_db);
+            OrderDetail = new OrderDetailRepository(_db);
 
         }
         public ICategoryRepository Category { get; private set; }
         public IRestaurantRepository Restaurant { get; private set; }
+        public IUserRepository User { get; private set; }
+        public IOrderHeaderRepository OrderHeader { get; private set; }
+        public IOrderDetailRepository OrderDetail { get; private set; }
+
 
         public void Save()
         {

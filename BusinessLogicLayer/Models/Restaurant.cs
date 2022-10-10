@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace BusinessLogicLayer.Models
 {
@@ -28,5 +29,11 @@ namespace BusinessLogicLayer.Models
         [ValidateNever]
         public Category Category { get; set; }
 
+        [Required]
+        [Display(Name = "Address")]
+        public int? RestaurantsAddressId { get; set; }
+        [ForeignKey("RestaurantsAddressId")]
+        [ValidateNever]
+        public RestaurantsAddress RestaurantsAddress { get; set; }
     }
 }
