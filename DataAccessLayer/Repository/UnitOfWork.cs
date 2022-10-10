@@ -1,4 +1,5 @@
-﻿using DataAccessLayer.Date;
+﻿using BusinessLogicLayer.Models;
+using DataAccessLayer.Date;
 using DataAccessLayer.Repository.IRepository;
 using System;
 using System.Collections.Generic;
@@ -16,10 +17,11 @@ namespace DataAccessLayer.Repository
         {
             _db = db;
             Category = new CategoryRepository(_db);
+            Restaurant = new RestaurantRepository(_db);
 
         }
         public ICategoryRepository Category { get; private set; }
-
+        public IRestaurantRepository Restaurant { get; private set; }
 
         public void Save()
         {

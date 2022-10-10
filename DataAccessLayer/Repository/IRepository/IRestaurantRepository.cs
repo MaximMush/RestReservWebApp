@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessLogicLayer.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Repository.IRepository
 {
-    public interface IUnitOfWork
+    public interface IRestaurantRepository : IRepository<Restaurant>
     {
-        ICategoryRepository Category { get; }
-        IRestaurantRepository Restaurant { get; }
-
-        void Save();
+        void Update(Restaurant obj);
     }
 }
