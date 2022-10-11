@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(RestReservDbContext))]
-    [Migration("20221010201501_AddedOrderHeaderAndOrderDetail")]
-    partial class AddedOrderHeaderAndOrderDetail
+    [Migration("20221011005421_CreateDatabaseAndAddedToDatabaseModels")]
+    partial class CreateDatabaseAndAddedToDatabaseModels
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -118,9 +118,6 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -140,14 +137,12 @@ namespace DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<string>("StreetAddress")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("RestaurantsAddressId");
+                    b.HasIndex("RestaurantsAddressId")
+                        .IsUnique();
 
                     b.ToTable("restaurants");
                 });
@@ -191,7 +186,6 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
@@ -430,8 +424,8 @@ namespace DataAccessLayer.Migrations
                         .IsRequired();
 
                     b.HasOne("BusinessLogicLayer.Models.RestaurantsAddress", "RestaurantsAddress")
-                        .WithMany()
-                        .HasForeignKey("RestaurantsAddressId")
+                        .WithOne("Restaurant")
+                        .HasForeignKey("BusinessLogicLayer.Models.Restaurant", "RestaurantsAddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -488,6 +482,12 @@ namespace DataAccessLayer.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("BusinessLogicLayer.Models.RestaurantsAddress", b =>
+                {
+                    b.Navigation("Restaurant")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

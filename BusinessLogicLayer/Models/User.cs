@@ -18,8 +18,7 @@ namespace BusinessLogicLayer.Models
         [Required]
         [MaxLength(50)]
         public string LastName { get; set; }
-        [Required]
-        public string Email { get; set; }
+
 
     }
 }

@@ -1,10 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using DataAccessLayer.Date;
-using Microsoft.AspNetCore.Identity;
+//using Microsoft.AspNetCore.Identity;
 using RestReservWebApp.Utility;
 using BusinessLogicLayer.Models;
 using DataAccessLayer.Repository.IRepository;
 using DataAccessLayer.Repository;
+using Microsoft.AspNetCore.Identity;
+
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,9 +16,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<RestReservDbContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
-builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
+
+builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<RestReservDbContext>();
+
+builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
+
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 

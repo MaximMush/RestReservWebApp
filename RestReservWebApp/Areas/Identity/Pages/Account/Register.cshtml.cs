@@ -12,13 +12,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using BusinessLogicLayer.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-using BusinessLogicLayer.Models;
 
 namespace RestReservWebApp.Areas.Identity.Pages.Account
 {
@@ -72,13 +72,10 @@ namespace RestReservWebApp.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [StringLength(50, ErrorMessage="The first name field should have a maximum of 50 characters" )]
-            [Display(Name="Firstname")]
+            [MaxLength(50)]
             public string FirstName { get; set; }
-
             [Required]
-            [StringLength(50, ErrorMessage = "The last name field should have a maximum of 50 characters")]
-            [Display(Name = "Lastname")]
+            [MaxLength(50)]
             public string LastName { get; set; }
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -125,7 +122,6 @@ namespace RestReservWebApp.Areas.Identity.Pages.Account
                 var user = CreateUser();
                 user.FirstName = Input.FirstName;
                 user.LastName = Input.LastName;
-
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);

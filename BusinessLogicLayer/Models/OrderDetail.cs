@@ -12,6 +12,7 @@ namespace BusinessLogicLayer.Models
 {
     public class OrderDetail
     {
+        [Key]
         public int Id { get; set; }
         [Required]
         public int OrderId { get; set; }

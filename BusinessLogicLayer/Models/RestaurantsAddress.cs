@@ -20,5 +20,6 @@ namespace BusinessLogicLayer.Models
         [Required]
         [MaxLength(50)]
         public string City { get; set; }
+        public Restaurant Restaurant { get; set; }
     }
 }
