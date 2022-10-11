@@ -21,6 +21,7 @@ namespace DataAccessLayer.Repository
             User = new UserRepository(_db);
             OrderHeader = new OrderHeaderRepository(_db);
             OrderDetail = new OrderDetailRepository(_db);
+            RestaurantAddress = new RestaurantAddressRepository (_db);
 
         }
         public ICategoryRepository Category { get; private set; }
@@ -28,6 +29,7 @@ namespace DataAccessLayer.Repository
         public IUserRepository User { get; private set; }
         public IOrderHeaderRepository OrderHeader { get; private set; }
         public IOrderDetailRepository OrderDetail { get; private set; }
+        public IRestaurantAddressRepository RestaurantAddress { get; private set; }
 
 
         public void Save()

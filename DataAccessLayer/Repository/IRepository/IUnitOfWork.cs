@@ -13,6 +13,7 @@ namespace DataAccessLayer.Repository.IRepository
         IUserRepository User { get; }
         IOrderDetailRepository OrderDetail { get; }
         IOrderHeaderRepository OrderHeader { get; }
+        IRestaurantAddressRepository RestaurantAddress { get; }
 
         void Save();
     }

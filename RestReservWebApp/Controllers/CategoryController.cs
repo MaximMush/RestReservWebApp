@@ -33,7 +33,7 @@ namespace RestReservWebApp.Controllers
         {
             if (obj.Name == obj.Description.ToString())
             {
-                ModelState.AddModelError("name", "The DisplayOrder cannot exactly match the Name.");
+                ModelState.AddModelError("name", "The Description cannot exactly match the Name.");
             }
             if (ModelState.IsValid)
             {

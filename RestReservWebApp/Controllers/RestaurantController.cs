@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Stripe;
 using BusinessLogicLayer.Models.ViewModels;
+using BusinessLogicLayer.Models;
 
 namespace RestReservWebApp.Controllers
 {
@@ -22,18 +23,20 @@ namespace RestReservWebApp.Controllers
             return View();
         }
 
+    
+
         //GET
         public IActionResult Upsert(int? id)
         {
             RestaurantVM restaurantVM = new()
             {
                 Restaurant = new(),
+                RestaurantsAddress = new(),
                 CategoryList = _unitOfWork.Category.GetAll().Select(i => new SelectListItem
                 {
                     Text = i.Name,
                     Value = i.Id.ToString()
-                })
-
+                }),
             };
 
             if (id == null || id == 0)
@@ -46,6 +49,7 @@ namespace RestReservWebApp.Controllers
             else
             {
                 restaurantVM.Restaurant = _unitOfWork.Restaurant.GetFirstOrDefault(u => u.Id == id);
+                restaurantVM.RestaurantsAddress = _unitOfWork.RestaurantAddress.GetFirstOrDefault(u => u.Id == id);
                 return View(restaurantVM);
 
                 //update product
@@ -66,7 +70,7 @@ namespace RestReservWebApp.Controllers
                 if (file != null)
                 {
                     string fileName = Guid.NewGuid().ToString();
-                    var uploads = Path.Combine(wwwRootPath, @"images\products");
+                    var uploads = Path.Combine(wwwRootPath, @"images\restaurants");
                     var extension = Path.GetExtension(file.FileName);
 
                     if (obj.Restaurant.ImageUrl != null)
@@ -88,13 +92,15 @@ namespace RestReservWebApp.Controllers
                 if (obj.Restaurant.Id == 0)
                 {
                     _unitOfWork.Restaurant.Add(obj.Restaurant);
+                    _unitOfWork.RestaurantAddress.Add(obj.RestaurantsAddress);
                 }
                 else
                 {
                     _unitOfWork.Restaurant.Update(obj.Restaurant);
+                    _unitOfWork.RestaurantAddress.Update(obj.RestaurantsAddress);
                 }
                 _unitOfWork.Save();
-                TempData["success"] = "Product created successfully";
+                TempData["success"] = "Restaurant created successfully";
                 return RedirectToAction("Index");
             }
             return View(obj);
@@ -106,8 +112,8 @@ namespace RestReservWebApp.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var productList = _unitOfWork.Restaurant.GetAll(includeProperties: "Category");
-            return Json(new { data = productList });
+            var restaurantList = _unitOfWork.Restaurant.GetAll(includeProperties: "Category");
+            return Json(new { data = restaurantList });
         }
 
         //POST

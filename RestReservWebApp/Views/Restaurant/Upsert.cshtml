@@ -27,31 +27,21 @@
 					<input asp-for="Restaurant.PhoneNumber" class="form-control" />
 					<span asp-validation-for="Restaurant.PhoneNumber" class="text-danger"></span>
 		</div>
-		@*<div class="mb-3 col-6">
-					<label asp-for="Restaurant.Address"></label>
-			<input asp-for="Restaurant.Address" class="form-control" />
-					<span asp-validation-for="Restaurant.Address" class="text-danger"></span>
+				<div class="mb-3 col-6">
+			<label asp-for="Restaurant.RestaurantsAddress.City"></label>
+					<input asp-for="Restaurant.RestaurantsAddress.City" class="form-control" />
+					<span asp-validation-for="Restaurant.RestaurantsAddress.City" class="text-danger"></span>
 		</div>
-		<div class="mb-3 col-6">
-			<label asp-for="Product.ListPrice"></label>
-			<input asp-for="Product.ListPrice" class="form-control" />
-			<span asp-validation-for="Product.ListPrice" class="text-danger"></span>
-		</div>
-		<div class="mb-3 col-6">
-			<label asp-for="Product.Price"></label>
-			<input asp-for="Product.Price" class="form-control" />
-			<span asp-validation-for="Product.Price" class="text-danger"></span>
-		</div>
-		<div class="mb-3 col-6">
-			<label asp-for="Product.Price50"></label>
-			<input asp-for="Product.Price50" class="form-control" />
-			<span asp-validation-for="Product.Price50" class="text-danger"></span>
-		</div>
-		<div class="mb-3 col-6">
-			<label asp-for="Product.Price100"></label>
-			<input asp-for="Product.Price100" class="form-control" />
-			<span asp-validation-for="Product.Price100" class="text-danger"></span>
-		</div>*@
+				<div class="mb-3 col-6">
+					<label asp-for="Restaurant.RestaurantsAddress.Street"></label>
+					<input asp-for="Restaurant.RestaurantsAddress.Street" class="form-control" />
+					<span asp-validation-for="Restaurant.RestaurantsAddress.Street" class="text-danger"></span>
+				</div>
+				<div class="mb-3 col-6">
+					<label asp-for="Restaurant.RestaurantsAddress.HouseNumber"></label>
+					<input asp-for="Restaurant.RestaurantsAddress.HouseNumber" class="form-control" />
+					<span asp-validation-for="Restaurant.RestaurantsAddress.HouseNumber" class="text-danger"></span>
+				</div>
 		<div class="mb-3">
 			<label asp-for="Restaurant.ImageUrl"></label>
 			<input type="file" id="uploadBox" name="file" class="form-control" />
@@ -65,13 +55,6 @@
 			<span asp-validation-for="Restaurant.CategoryId" class="text-danger"></span>
 		</div>
 
-@*		<div class="mb-3 col-6">
-			<label asp-for="Product.CoverTypeId"></label>
-			<select asp-for="Product.CoverTypeId" asp-items="@Model.CoverTypeList" class="form-select">
-				<option disabled selected>--Select CoverType--</option>
-			</select>
-			<span asp-validation-for="Product.CoverTypeId" class="text-danger"></span>
-		</div>*@
 		<div class="col-12">
 			@if (Model.Restaurant.Id != 0)
 			{

@@ -1,5 +1,4 @@
 ﻿using BusinessLogicLayer.Models;
-using BusinessLogicLayer.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Repository.IRepository
 {
-    public interface IRestaurantRepository : IRepository<Restaurant>
+	public interface IRestaurantAddressRepository : IRepository<RestaurantsAddress>
     {
+        void Update(RestaurantsAddress obj);
 
-		void Update(Restaurant obj);
-    }
+	}
 }
