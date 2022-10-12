@@ -1,4 +1,5 @@
-﻿@model BusinessLogicLayer.Models.ViewModels.RestaurantVM
+﻿@using BusinessLogicLayer.Models.ViewModels
+@model RestaurantVM
 
 <form method="post" asp-action="Upsert" enctype="multipart/form-data">
 	<input asp-for="Restaurant.Id" hidden />
@@ -28,19 +29,19 @@
 					<span asp-validation-for="Restaurant.PhoneNumber" class="text-danger"></span>
 		</div>
 				<div class="mb-3 col-6">
-			<label asp-for="Restaurant.RestaurantsAddress.City"></label>
-					<input asp-for="Restaurant.RestaurantsAddress.City" class="form-control" />
-					<span asp-validation-for="Restaurant.RestaurantsAddress.City" class="text-danger"></span>
+			<label asp-for="Restaurant.City"></label>
+					<input asp-for="Restaurant.City" class="form-control" />
+					<span asp-validation-for="Restaurant.City" class="text-danger"></span>
 		</div>
 				<div class="mb-3 col-6">
-					<label asp-for="Restaurant.RestaurantsAddress.Street"></label>
-					<input asp-for="Restaurant.RestaurantsAddress.Street" class="form-control" />
-					<span asp-validation-for="Restaurant.RestaurantsAddress.Street" class="text-danger"></span>
+					<label asp-for="Restaurant.Street"></label>
+					<input asp-for="Restaurant.Street" class="form-control" />
+					<span asp-validation-for="Restaurant.Street" class="text-danger"></span>
 				</div>
 				<div class="mb-3 col-6">
-					<label asp-for="Restaurant.RestaurantsAddress.HouseNumber"></label>
-					<input asp-for="Restaurant.RestaurantsAddress.HouseNumber" class="form-control" />
-					<span asp-validation-for="Restaurant.RestaurantsAddress.HouseNumber" class="text-danger"></span>
+					<label asp-for="Restaurant.HouseNumber"></label>
+					<input asp-for="Restaurant.HouseNumber" class="form-control" />
+					<span asp-validation-for="Restaurant.HouseNumber" class="text-danger"></span>
 				</div>
 		<div class="mb-3">
 			<label asp-for="Restaurant.ImageUrl"></label>

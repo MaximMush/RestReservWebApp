@@ -18,6 +18,14 @@ namespace BusinessLogicLayer.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public string? PhoneNumber { get; set; }
+        [Required]
+        public int HouseNumber { get; set; }
+        [Required]
+        [MaxLength(50)]
+        public string Street { get; set; }
+        [Required]
+        [MaxLength(50)]
+        public string City { get; set; }
         public string ImageUrl { get; set; }
 
         [Required]
@@ -27,10 +35,5 @@ namespace BusinessLogicLayer.Models
         [ValidateNever]
         public Category Category { get; set; }
  
-        [Display(Name = "Address")]
-        public int? RestaurantsAddressId { get; set; }
-        [ForeignKey("RestaurantsAddressId")]
-        [ValidateNever]
-        public RestaurantsAddress RestaurantsAddress { get; set; }
     }
 }

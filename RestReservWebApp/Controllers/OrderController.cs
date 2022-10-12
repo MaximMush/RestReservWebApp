@@ -67,8 +67,41 @@ namespace RestReservWebApp.Controllers
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
+
 
         #region API CALLS
         [HttpGet]

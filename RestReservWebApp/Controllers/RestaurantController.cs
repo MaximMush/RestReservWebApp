@@ -31,7 +31,6 @@ namespace RestReservWebApp.Controllers
             RestaurantVM restaurantVM = new()
             {
                 Restaurant = new(),
-                RestaurantsAddress = new(),
                 CategoryList = _unitOfWork.Category.GetAll().Select(i => new SelectListItem
                 {
                     Text = i.Name,
@@ -41,26 +40,20 @@ namespace RestReservWebApp.Controllers
 
             if (id == null || id == 0)
             {
-                //create product
-                //ViewBag.CategoryList = CategoryList;
-                //ViewData["CoverTypeList"] = CoverTypeList;
+
                 return View(restaurantVM);
             }
             else
             {
                 restaurantVM.Restaurant = _unitOfWork.Restaurant.GetFirstOrDefault(u => u.Id == id);
-                restaurantVM.RestaurantsAddress = _unitOfWork.RestaurantAddress.GetFirstOrDefault(u => u.Id == id);
+              
                 return View(restaurantVM);
-
-                //update product
             }
-
-
         }
 
         //POST
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        
         public IActionResult Upsert(RestaurantVM obj, IFormFile? file)
         {
 
@@ -90,21 +83,39 @@ namespace RestReservWebApp.Controllers
 
                 }
                 if (obj.Restaurant.Id == 0)
-                {
+               {
                     _unitOfWork.Restaurant.Add(obj.Restaurant);
-                    _unitOfWork.RestaurantAddress.Add(obj.RestaurantsAddress);
                 }
                 else
-                {
+               {
                     _unitOfWork.Restaurant.Update(obj.Restaurant);
-                    _unitOfWork.RestaurantAddress.Update(obj.RestaurantsAddress);
-                }
+               }
                 _unitOfWork.Save();
                 TempData["success"] = "Restaurant created successfully";
                 return RedirectToAction("Index");
             }
             return View(obj);
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

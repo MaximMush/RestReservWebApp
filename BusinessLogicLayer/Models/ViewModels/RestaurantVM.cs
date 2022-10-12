@@ -12,7 +12,6 @@ namespace BusinessLogicLayer.Models.ViewModels
     public class RestaurantVM
     {
         public Restaurant Restaurant { get; set; }
-        public RestaurantsAddress RestaurantsAddress { get; set; }
         [ValidateNever]
         public IEnumerable<SelectListItem> CategoryList { get; set; }
 
